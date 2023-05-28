@@ -43,21 +43,20 @@ function checkWinner(pChoice, cChoice) {
   }
 }
 
-function fiveRoundGame() {
-  for (let i = 0; i < 5; i++) {
-    alert(
-      `${checkWinner(getPlayerChoice(), getComputerChoice())}\nPlayer Score: ${
-        scores.playerOne
-      } \nComputer Score: ${scores.computerPlayer}\n`
-    );
-    if (i === 4) {
-      if (scores.playerOne > scores.computerPlayer) {
-        alert("PlayerOne Wins the game");
-      } else {
-        alert("Computer Wins the game");
-      }
-    }
-  }
-}
-
-fiveRoundGame();
+// function fiveRoundGame() {
+//   for (let i = 0; i < 5; i++) {
+//     alert(
+//       `${checkWinner(getPlayerChoice(), getComputerChoice())}\nPlayer Score: ${
+//         scores.playerOne
+//       } \nComputer Score: ${scores.computerPlayer}\n`
+//     );
+//     if (i === 4) {
+//       if (scores.playerOne > scores.computerPlayer) {
+//         alert("PlayerOne Wins the game");
+//       } else {
+//         alert("Computer Wins the game");
+//       }
+//     }
+//   }
+// }
+// fiveRoundGame();
