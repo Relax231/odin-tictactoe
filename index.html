@@ -5,7 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TicTacToe</title>
-    <script src="scriptalt.js"></script>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body></body>
+  <body>
+    <div class="btn-container">
+      <button class="btn-rock" onclick="playRound('rock', getComputerChoice())">
+        Rock
+      </button>
+      <button
+        class="btn-paper"
+        onclick="playRound('paper',  getComputerChoice())"
+      >
+        Paper
+      </button>
+      <button
+        class="btn-scissors"
+        onclick="playRound('scissors', getComputerChoice())"
+      >
+        Scissors
+      </button>
+    </div>
+  </body>
 </html>
