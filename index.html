@@ -9,22 +9,67 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="btn-container">
-      <button class="btn-rock" onclick="playRound('rock', getComputerChoice())">
-        Rock
-      </button>
-      <button
-        class="btn-paper"
-        onclick="playRound('paper',  getComputerChoice())"
-      >
-        Paper
-      </button>
-      <button
-        class="btn-scissors"
-        onclick="playRound('scissors', getComputerChoice())"
-      >
-        Scissors
-      </button>
+    <div class="wrapper">
+      <div class="playerOneContainer shadow">
+        <span>PlayerOne</span>
+        <b>
+          <span class="scorePlayer" style="display: block; padding-top: 10px"
+            >Score: 0</span
+          >
+          <p class="bo5player" style="margin-top: 0px">bo5 wins: 0</p>
+        </b>
+      </div>
+
+      <div class="topNavHeading">
+        <div class="headingContainer">
+          <h1>Rock, Paper, Scissors!</h1>
+          <h3><u>best of 5!</u></h3>
+        </div>
+      </div>
+
+      <div class="computerPlayerContainer shadow">
+        <span>Computer</span>
+        <b>
+          <span class="scorePC" style="display: block; padding-top: 10px"
+            >Score: 0</span
+          >
+          <p class="bo5computer" style="margin-top: 0px">bo5 wins: 0</p>
+        </b>
+      </div>
+      <div class="winnerOne"></div>
+      <div class="roundContainer"><h2 class="roundCounter">Round: 1</h2></div>
+      <div class="winnerPc"></div>
+      <div class="playerChose"></div>
+      <div class="btn-container">
+        <button
+          class="btn-rock button-92"
+          role="button"
+          onclick="playRound('rock', getComputerChoice())"
+        >
+          Rock
+        </button>
+        <button
+          class="btn-paper button-92"
+          role="button"
+          onclick="playRound('paper',  getComputerChoice())"
+        >
+          Paper
+        </button>
+        <button
+          class="btn-scissors button-92"
+          role="button"
+          onclick="playRound('scissors', getComputerChoice())"
+        >
+          Scissors
+        </button>
+      </div>
+      <div class="pcChose"></div>
+      <div class="lastRoundplayer">
+        <p class="whowinPlayer"></p>
+      </div>
+      <div class="lastRoundpc">
+        <p class="whowinPc"></p>
+      </div>
     </div>
   </body>
 </html>
