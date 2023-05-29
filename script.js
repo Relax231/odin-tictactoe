@@ -2,7 +2,6 @@ let scores = {
   playerOne: 0,
   computerPlayer: 0,
   playedRounds: 0,
-  round: 0,
   playerbo5: 0,
   computerbo5: 0,
 };
@@ -10,21 +9,16 @@ let scores = {
 let choices = ["rock", "paper", "scissors"];
 
 window.addEventListener("DOMContentLoaded", (event) => {
-  scores.round = 0;
   scores.playerOne = 0;
   scores.computerPlayer = 0;
   scores.playedRounds = 0;
-  scores.round = 0;
 });
 
-// reset after game one  scores.playerOne and scores.computerPlayer
-// reset pleyedRounds
-// show who one the last Round
 function resetGame() {
-  let whowinPlayer = document.querySelector(".whowinPlayer");
-  let whowinPc = document.querySelector(".whowinPc");
-  let bo5player = document.querySelector(".bo5player");
-  let bo5computer = document.querySelector(".bo5computer");
+  const whowinPlayer = document.querySelector(".whowinPlayer");
+  const whowinPc = document.querySelector(".whowinPc");
+  const bo5player = document.querySelector(".bo5player");
+  const bo5computer = document.querySelector(".bo5computer");
 
   if (scores.playedRounds === 5) {
     if (scores.playerOne > scores.computerPlayer) {
@@ -45,78 +39,60 @@ function resetGame() {
       whowinPlayer.textContent = "Last Round was a Tie!";
       whowinPc.textContent = "Last Round was a Tie!";
     }
+
     scores.playedRounds = 0;
     scores.playerOne = 0;
     scores.computerPlayer = 0;
   }
 }
 
-function showRound(winner) {
-  resetGame();
-  let round = document.querySelector(".roundCounter");
+function updateDOM() {
+  const round = document.querySelector(".roundCounter");
+  round.textContent = `Round: ${scores.playedRounds}`;
 
-  round.innerText = `Round: ${scores.playedRounds}`;
-  let playerScore = document.querySelector(".scorePlayer");
-  playerScore.innerText = `Score: ${scores.playerOne}`;
-  let computerScore = document.querySelector(".scorePC");
-  computerScore.innerText = `Score: ${scores.computerPlayer}`;
+  const playerScore = document.querySelector(".scorePlayer");
+  playerScore.textContent = `Score: ${scores.playerOne}`;
 
-  if (winner === "player") {
-    document.querySelector(".winnerOne").style.visibility = "visible";
-    document.querySelector(".winnerPc").style.visibility = "hidden";
-    document.querySelector(".winnerOne").innerText = "Player Wins!";
-    document.querySelector(".winnerPc").innerText = "";
-
-    setTimeout(() => {
-      document.querySelector(".winnerPc").style.visibility = "hidden";
-      document.querySelector(".winnerOne").style.visibility = "hidden";
-    }, 2000);
-  } else if (winner === "computer") {
-    document.querySelector(".winnerOne").style.visibility = "hidden";
-    document.querySelector(".winnerPc").style.visibility = "visible";
-    document.querySelector(".winnerOne").innerText = "";
-    document.querySelector(".winnerPc").innerText = "Computer Wins!";
-
-    setTimeout(() => {
-      document.querySelector(".winnerPc").style.visibility = "hidden";
-      document.querySelector(".winnerOne").style.visibility = "hidden";
-    }, 2000);
-    //show computer wins label
-  } else {
-    document.querySelector(".winnerOne").style.visibility = "visible";
-    document.querySelector(".winnerOne").innerText = "Its a Tie!";
-
-    document.querySelector(".winnerPc").style.visibility = "visible";
-    document.querySelector(".winnerPc").innerText = "Its a Tie!";
-
-    setTimeout(() => {
-      document.querySelector(".winnerPc").style.visibility = "hidden";
-      document.querySelector(".winnerOne").style.visibility = "hidden";
-    }, 2000);
-    //its a tie,
-  }
+  const computerScore = document.querySelector(".scorePC");
+  computerScore.textContent = `Score: ${scores.computerPlayer}`;
 }
 
-// function getPlayerChoice() {
-//   let playerChoice = "";
-//   while (!playerChoice) {
-//     let playerPrompt = prompt("Pick rock, paper, scissors!")
-//       .toLowerCase()
-//       .trim();
-//     if (choices.includes(playerPrompt)) {
-//       playerChoice = playerPrompt;
-//     } else {
-//       continue;
-//     }
-//   }
-//   return playerChoice;
-// }
+function showWinner(winner) {
+  const winnerOne = document.querySelector(".winnerOne");
+  const winnerPc = document.querySelector(".winnerPc");
+
+  winnerOne.style.visibility = "hidden";
+  winnerPc.style.visibility = "hidden";
+
+  if (winner === "player") {
+    winnerOne.textContent = "Player Wins!";
+    winnerOne.style.visibility = "visible";
+  } else if (winner === "computer") {
+    winnerPc.textContent = "Computer Wins!";
+    winnerPc.style.visibility = "visible";
+  } else {
+    winnerOne.textContent = "It's a Tie!";
+    winnerPc.textContent = "It's a Tie!";
+    winnerOne.style.visibility = "visible";
+    winnerPc.style.visibility = "visible";
+  }
+
+  setTimeout(() => {
+    winnerOne.style.visibility = "hidden";
+    winnerPc.style.visibility = "hidden";
+  }, 2000);
+}
+
+function showRound(winner) {
+  resetGame();
+  updateDOM();
+  showWinner(winner);
+}
 
 function getComputerChoice() {
-  //gets called when the button inputs it into the playRound function
-  let computerChoice = Math.floor(Math.random() * 3);
+  const computerChoice = Math.floor(Math.random() * 3);
   console.log(`Computer chose: ${choices[computerChoice]}`);
-  let pcChose = document.querySelector(".pcChose"); //updates the dom with the pick
+  const pcChose = document.querySelector(".pcChose"); // updates the DOM with the pick
   pcChose.textContent = `Computer: ${
     choices[computerChoice].charAt(0).toUpperCase() +
     choices[computerChoice].slice(1)
@@ -125,22 +101,20 @@ function getComputerChoice() {
 }
 
 function showPlayerChoice(pChoice) {
-  let playerChose = document.querySelector(".playerChose"); //updates the dom with the pick
+  const playerChose = document.querySelector(".playerChose"); // updates the DOM with the pick
   playerChose.textContent = `Player: ${
     pChoice.charAt(0).toUpperCase() + pChoice.slice(1)
   }`;
 }
 
 function playRound(pChoice, cChoice) {
-  //gets called from a button that inputs a string: rock,paper,scissors and the function getComputerChoice()
-  showPlayerChoice(pChoice);
+  showPlayerChoice(pChoice); //my button inputs the pChoice here. so i use it to call the showPlayerChoice funciton to update the DOM
   switch (pChoice + cChoice) {
     case "rockscissors":
     case "paperrock":
     case "scissorspaper":
       scores.playerOne++;
       scores.playedRounds++;
-      scores.round++;
       console.log("PlayerOne wins this round!");
       showRound("player");
       return "PlayerOne wins this round!";
@@ -150,32 +124,12 @@ function playRound(pChoice, cChoice) {
       scores.computerPlayer++;
       console.log("Computer wins this round!");
       scores.playedRounds++;
-      scores.round++;
       showRound("computer");
       return "Computer wins this round!";
     default:
       scores.playedRounds++;
-      scores.round++;
       showRound("tie");
-      console.log("Its a Tie Game!");
+      console.log("It's a Tie Game!");
       return "It's a Tie game!";
   }
 }
-
-// function fiveRoundGame() {
-//   for (let i = 0; i < 5; i++) {
-//     alert(
-//       `${playRound(getPlayerChoice(), getComputerChoice())}\nPlayer Score: ${
-//         scores.playerOne
-//       } \nComputer Score: ${scores.computerPlayer}\n`
-//     );
-//     if (i === 4) {
-//       if (scores.playerOne > scores.computerPlayer) {
-//         alert("PlayerOne Wins the game");
-//       } else {
-//         alert("Computer Wins the game");
-//       }
-//     }
-//   }
-// }
-// fiveRoundGame();
